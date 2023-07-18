@@ -6,64 +6,52 @@
 
     <div class="row"> @* Row Containing Input Form and Loan Breakdown*@
 
-        <div class="col-6"> @* Column Containing Input Form*@
+        <div class="col"> @* Column Containing Input Form*@
             <form class="loanForm" asp-controller="Home" asp-action="App" method="post">
                 <div class="form-row">
                     <div class="form-group col-12">
                         <label asp-for="Amount">Loan Amount</label>
-                        <input tupe="number" class="form-control" id="lAmount" min="1000" step="500" value="@Model.Amount" asp-for="Amount" />
+                        <input asp-for="Amount" tupe="number" class="form-control" id="lAmount" min="1000.00" value="@Model.Amount" />
                     </div>
                     <div class="form-group col-12">
                         <label asp-for="Term">Term</label>
-                        <input tupe="number" class="form-control" id="lTerm" min="1" value="@Model.Term" asp-for="Term" />
+                        <input asp-for="Term" tupe="number" class="form-control" id="lTerm" min="1" value="@Model.Term" />
                     </div>
                     <div class="form-group col-12">
                         <label asp-for="Rate">Rate</label>
-                        <input tupe="number" class="form-control" id="lRate" min="1.00" step="0.25" value="@Model.Rate" asp-for="Rate" />
+                        <input asp-for="Rate" tupe="number" class="form-control" id="lRate" min="1.00M" value="@Model.Rate" />
                     </div>
                 </div>
                 <button type="submit" class="btn btn-cfOrange mt-2">Calculate</button>
             </form>
         </div>
 
-        <div class="col-6"> @* Column Containing Loan Breakdown*@
+        <div class="col"> @* Column Containing Loan Breakdown*@
 
             <div id="paymentTitle">
-                <p mt-0>Your Monthly Payments</p>
+                <p>Your Monthly Payments</p>
             </div>
+            <p id="payment">@Model.Payment.ToString("C")</p>
 
-            <p id="payment" class="mt-0">@Model.Payment.ToString("C")</p>
+            <div class="row">    
+                
+                @* Row Containing Total Principal Info*@
+                <div class="col-3" >&nbsp;</div>
+                <div class="col-3"><label class="text-start">Total Principal</label></div>
+                <div class="col-3 text-end"><label>@Model.Amount.ToString("C")</label></div>
+                <div class="col-3">&nbsp;</div>
 
-            <div id="loanBreakDown">
-                <div class="row">
-                    @* Row Containing Total Principal Info*@
-                    <div class="col-6">
-                        <label>Total Principal</label>
-                    </div>
-                    <div class="col-6">
-                        <label>@Model.Amount.ToString("C")</label>
-                    </div>
-                </div>
+                @* Row Containing Total Interest Info*@
+                <div class="col-3">&nbsp;</div>
+                <div class="col-3"><label class="text-start">Total Interest</label></div>
+                <div class="col-3 text-end"><label>@Model.TotalInterest.ToString("C")</label></div>
+                <div class="col-3">&nbsp;</div>
 
-                <div class="row">
-                    @* Row Containing Total Interest Info*@
-                    <div class="col-6">
-                        <label>Total Interest</label>
-                    </div>
-                    <div class="col-6">
-                        <label>@Model.TotalInterest.ToString("C")</label>
-                    </div>
-                </div>
-
-                <div class="row">
-                    @* Row Containing Total Cost Info*@
-                    <div class="col-6">
-                        <label>Total Cost</label>
-                    </div>
-                    <div class="col-6" id="ttlCost">
-                        <label>@Model.TotalCost.ToString("C")</label>
-                    </div>
-                </div>
+                @* Row Containing Total Cost Info*@
+                <div class="col-3">&nbsp;</div>
+                <div class="col-3"><label class="text-start">Total Cost</label></div>
+                <div class="col-3 text-end" id="ttlCost"><label>@Model.TotalCost.ToString("C")</label></div>
+                <div class="col-3">&nbsp;</div>
 
             </div>
 

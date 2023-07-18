@@ -40,6 +40,7 @@ namespace LoanSharkMVC.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult App(Loan loan)
         {
             return View(loan);
