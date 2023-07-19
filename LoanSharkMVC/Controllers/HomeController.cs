@@ -1,4 +1,5 @@
 ﻿using LoanSharkMVC.Models;
+using LoanSharkMVC.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -40,10 +41,15 @@ namespace LoanSharkMVC.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [AutoValidateAntiforgeryToken]
         public IActionResult App(Loan loan)
         {
-            return View(loan);
+            // Calculate the Loan and Payment Schedule
+            var loanHelper = new LoanHelper();
+
+            Loan newLoan = loanHelper.GetPayments(loan);
+
+            return View(newLoan);
         }
 
 
